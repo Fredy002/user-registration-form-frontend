@@ -1,50 +1,110 @@
-# React + TypeScript + Vite
+Let's create a similar structure for the frontend project, translated and adapted for your React project:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# User Registration Form Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+This project is a **frontend application** developed using **React** and **TypeScript** for managing a user registration form. It allows you to perform Create, Read, Update, and Delete (CRUD) operations on user records with a modern and responsive interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **React with TypeScript**: Ensuring type safety and better developer experience.
+- **CRUD Operations**: Add, edit, and delete users from the form.
+- **Responsive Design**: Adapts to various screen sizes, including mobile and desktop.
+- **Search and Filter**: Allows users to search by name and dynamically filters the displayed results.
+- **Modular Components**: Separate components for handling forms, tables, and user interactions.
+- **Integration with RESTful API**: Uses Axios to connect to the Laravel backend API for data fetching and manipulation.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Requirements
+
+- **Node.js >= 14.0**
+- **npm** or **yarn**
+- **Git**
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Fredy002/user-registration-form-frontend.git
+cd user-registration-form-frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Create an `.env` File
+
+Create an `.env` file in the root directory with the following content:
+
+```env
+REACT_APP_API_URL=http://localhost:8000/api
+```
+
+Make sure the URL points to your Laravel backend API.
+
+### 4. Start the Development Server
+
+```bash
+npm start
+```
+
+The application will be available at `http://localhost:3000`.
+
+## Project Structure
+
+```
+user-registration-form-frontend/
+├── src/
+│   ├── components/
+│   │   ├── DataTableComponent.tsx
+│   │   ├── EditModalComponent.tsx
+│   │   ├── ModalComponent.tsx
+│   │   └── SearchBarComponent.tsx
+│   ├── services/
+│   │   └── api.ts  // Axios instance for API requests
+│   ├── styles/
+│   │   ├── App.css
+│   │   ├── components/
+│   │   │   ├── DataTable.css
+│   │   │   ├── EditModal.css
+│   │   │   ├── Modal.css
+│   │   │   └── SearchBar.css
+│   ├── types/
+│   │   └── RowData.ts
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── main.tsx
+├── .env
+├── package.json
+└── README.md
+```
+
+## Usage
+
+Once the development server is running, you can use the web application to:
+
+- **Add New Users**: Click on `Add User` and fill in the form.
+- **Edit Users**: Click on the `Edit` button next to a user record and modify the details.
+- **Delete Users**: Click on the `Delete` button to remove a user from the list.
+- **Search Users**: Use the search bar to filter the users by their name.
+
+## Contribution
+
+Contributions are welcome! Please open an issue or submit a pull request if you would like to contribute to the project.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+- **GitHub**: [Fredy002](https://github.com/Fredy002)
+- **LinkedIn**: [Fredy Antonio Almeyda Alania](https://www.linkedin.com/in/fredy-antonio-almeyda-alania/)
+
+Feel free to explore the code, suggest improvements, or ask questions. Happy coding!
