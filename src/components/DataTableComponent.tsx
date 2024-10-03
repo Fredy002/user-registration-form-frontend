@@ -65,8 +65,8 @@ const DataTableComponent = ({ records, loading, onExport, onDelete, onEdit }: Da
                 data={records}
                 pagination
                 progressPending={loading}
+                paginationPerPage={5}
                 fixedHeader
-                selectableRows
             />
         </div>
     );
