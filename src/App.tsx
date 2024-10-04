@@ -15,17 +15,38 @@ export default function App() {
   const [editModalOpen, setEditModalOpen] = useState(false); // Estado para el modal de edición
   const [userToEdit, setUserToEdit] = useState<RowData | null>(null); // Estado para el usuario a editar
 
-  // Obtener los usuarios desde la API
+  // Función para calcular la edad basada en la fecha de nacimiento
+  const calculateAge = (birthdate: string): string => {
+    const birthDate = new Date(birthdate);
+    const currentDate = new Date(); // Obtener la fecha actual
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+    const dayDifference = currentDate.getDate() - birthDate.getDate();
+
+    // Ajustar la edad si el mes y el día de la fecha actual son menores que la fecha de nacimiento
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+      age--;
+    }
+
+    return age.toString(); // Convertir la edad a string para mostrarla correctamente
+  };
+
+  // Obtener los usuarios desde la API y calcular la edad
   const getUsers = async () => {
     try {
       const response = await api.get('/user');
-      setRecords(response.data.user);
+      const usersWithAge = response.data.user.map((user: RowData) => ({
+        ...user,
+        edad: calculateAge(user.fecha_nacimiento), // Calcular la edad para cada usuario
+      }));
+      setRecords(usersWithAge); // Actualizar el estado con los usuarios y su edad
     } catch (error) {
       console.error('Error al obtener los usuarios:', error);
     } finally {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     getUsers();
@@ -60,13 +81,6 @@ export default function App() {
     setEditModalOpen(true); // Abrir el modal de edición
   };
 
-  // Calcular la edad automáticamente basado en la fecha de nacimiento
-  const calculateAge = (birthdate: string): string => {
-    const birthDate = new Date(birthdate);
-    const ageDifMs = Date.now() - birthDate.getTime();
-    const ageDate = new Date(ageDifMs);
-    return Math.abs(ageDate.getUTCFullYear() - 1970).toString();
-  };
 
   // Función para agregar un nuevo usuario a la tabla
   const addNewUser = async (newUser: RowData) => {
